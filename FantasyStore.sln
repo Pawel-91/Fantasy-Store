@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyStore", "FantasyStore\FantasyStore.csproj", "{5239D485-5AB2-4CEF-B78C-AA06210A6FCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FantasyStoreTests", "FantasyStoreTests\FantasyStoreTests.csproj", "{57853E8A-1C05-4C66-B486-936410BC03C8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5239D485-5AB2-4CEF-B78C-AA06210A6FCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5239D485-5AB2-4CEF-B78C-AA06210A6FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5239D485-5AB2-4CEF-B78C-AA06210A6FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5239D485-5AB2-4CEF-B78C-AA06210A6FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{57853E8A-1C05-4C66-B486-936410BC03C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{57853E8A-1C05-4C66-B486-936410BC03C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{57853E8A-1C05-4C66-B486-936410BC03C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{57853E8A-1C05-4C66-B486-936410BC03C8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FADF8A46-3039-4F85-BA0D-080CF03A706E}
+	EndGlobalSection
+EndGlobal

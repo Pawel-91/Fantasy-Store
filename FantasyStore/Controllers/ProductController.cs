@@ -1,4 +1,5 @@
 ﻿using FantasyStore.Models;
+using FantasyStore.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
@@ -15,10 +16,20 @@ namespace FantasyStore.Controllers
         }
 
         // GET: /<controller>/
-        public ViewResult List(int ProductPage = 1) =>
-            View(repository.Products
+        public ViewResult List(int productPage = 1) =>
+            View(new ProductsListViewModel
+            {
+                Products = repository.Products
                 .OrderBy(p => p.ProductID)
-                .Skip((ProductPage - 1) * PageSize)
-                .Take(PageSize));
+                .Skip((productPage - 1) * PageSize)
+                .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Products
+                        .Count()
+                }
+            });
     }
 }

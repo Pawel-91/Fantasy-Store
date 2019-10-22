@@ -42,6 +42,11 @@ namespace FantasyStore
             app.UseStaticFiles();
             app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "pagination",
+                    template: "Products/Page{productPage}",
+                    defaults: new { Controller = "Product", action = "List" });
+
                 routes.MapRoute("default", "{controller=Product}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);

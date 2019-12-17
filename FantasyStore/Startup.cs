@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using FantasyStore.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 
 namespace FantasyStore
 {
@@ -21,6 +22,8 @@ namespace FantasyStore
                     Configuration["Data:FantasyStoreProducts:ConnectionString"]));
 
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddScoped(sp => SessionCart.GetCart(sp));                      // !!!!
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             services.AddMvc();
             services.AddMemoryCache();   // sets up the in-memory data store - lost after application stops or restarts

@@ -23,6 +23,8 @@ namespace FantasyStore
             services.AddTransient<IProductRepository, EFProductRepository>();
 
             services.AddMvc();
+            services.AddMemoryCache();   // sets up the in-memory data store - lost after application stops or restarts
+            services.AddSession();       // the services used to access session data
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -35,7 +37,9 @@ namespace FantasyStore
 
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            app.UseMvc(routes =>
+            app.UseSession();       // allows the session system to automatically associate requests with sessions when they arrive from the client
+            
+                        app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: null,

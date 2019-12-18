@@ -1,8 +1,6 @@
 ﻿using System.Linq;
 using FantasyStore.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using FantasyStore.Infrastructure;
 using FantasyStore.Models.ViewModels;
 
 namespace FantasyStore.Controllers

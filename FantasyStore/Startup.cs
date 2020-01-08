@@ -22,6 +22,7 @@ namespace FantasyStore
                     Configuration["Data:FantasyStoreProducts:ConnectionString"]));
 
             services.AddTransient<IProductRepository, EFProductRepository>();
+            services.AddTransient<IOrderRepository, EFOrderRepository>();
             services.AddScoped(sp => SessionCart.GetCart(sp));                      // !!!!
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

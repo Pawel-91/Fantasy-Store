@@ -1,9 +1,6 @@
 ﻿using FantasyStore.Models;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FantasyStore.Controllers
 {
@@ -16,6 +13,24 @@ namespace FantasyStore.Controllers
         {
             repository = repoService;
             cart = cartService;
+        }
+
+        public ViewResult List() =>
+            View(repository.Orders.Where(o => !o.Shipped));
+
+        [HttpPost]
+        public IActionResult MarkShipped(int orderID)
+        {
+            Order order = repository.Orders
+                .FirstOrDefault(o => o.OrderId == orderID);
+
+            if(order != null)
+            {
+                order.Shipped = true;
+                repository.SaveOrder(order);
+            }
+
+            return RedirectToAction(nameof(List));
         }
 
         public ViewResult Checkout() => View(new Order());

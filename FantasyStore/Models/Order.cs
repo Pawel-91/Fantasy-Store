@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FantasyStore.Models
 {
@@ -14,6 +11,9 @@ namespace FantasyStore.Models
 
         [BindNever]
         public ICollection<CartLine> Lines { get; set; }
+
+        [BindNever]
+        public bool Shipped { get; set; }
 
         [Required(ErrorMessage = "Add name and surname, please.")]
         public string Name { get; set; }

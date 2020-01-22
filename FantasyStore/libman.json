@@ -1,6 +1,7 @@
 {
   "version": "1.0",
   "defaultProvider": "unpkg",
+  "defaultDestination": "wwwroot/lib/",
   "libraries": [
     {
       "library": "bootstrap@4.0.0-alpha.6",
@@ -10,6 +11,18 @@
       "library": "font-awesome@4.7.0",
       "destination": "wwwroot/lib/fontawesome/",
       "provider": "cdnjs"
+    },
+    {
+      "library": "jquery@3.2.1",
+      "destination": "wwwroot/lib/jquery/"
+    },
+    {
+      "library": "jquery-validation@1.17.0",
+      "destination": "wwwroot/lib/jquery-validation"
+    },
+    {
+      "library": "jquery-validation-unobtrusive@3.2.6",
+      "destination": "wwwroot/lib/jquery-validation-unobtrusive"
     }
   ]
 }

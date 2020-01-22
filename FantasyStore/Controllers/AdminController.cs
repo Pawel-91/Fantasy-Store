@@ -1,5 +1,6 @@
 ﻿using FantasyStore.Models;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace FantasyStore.Controllers
 {
@@ -14,5 +15,24 @@ namespace FantasyStore.Controllers
 
         public ViewResult Index() => View(repository.Products);
 
+        public ViewResult Edit(int productId)
+            => View(repository.Products
+                .FirstOrDefault(p => p.ProductID == productId));
+
+        [HttpPost]
+        public IActionResult Edit(Product product)
+        {
+            if(ModelState.IsValid)
+            {
+                repository.SaveProduct(product);
+                TempData["message"] = $"Saved {product.Name}";
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // Error in data
+                return View(product);
+            }
+        }
     }
 }

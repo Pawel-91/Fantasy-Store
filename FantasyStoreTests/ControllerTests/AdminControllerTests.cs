@@ -139,6 +139,32 @@ namespace FantasyStoreTests.ControllerTests
             Assert.IsType<ViewResult>(result);
         }
 
+        [Fact]
+        public void Can_Delete_Valid_Products()
+        {
+            // Arrange - creating product
+            Product prod = new Product { ProductID = 2, Name = "Test" };
+
+            // Arrange - creating repository mock
+            Mock<IProductRepository> mock = new Mock<IProductRepository>();
+
+            mock.Setup(m => m.Products).Returns(new Product[]
+            {
+                new Product { ProductID = 1, Name = "P1"},
+                prod,
+                new Product { ProductID = 2, Name = "P3"}
+            }.AsQueryable());
+
+            // Arrange - create controller
+            AdminController target = new AdminController(mock.Object);
+
+            // Act - deleting product
+            target.Delete(2);
+
+            // Assert - checking if repository method has been called with correct product
+            mock.Verify(m => m.DeleteProduct(prod.ProductID));
+        }
+
         private T GetViewModel<T>(IActionResult result) where T : class
          => (result as ViewResult)?.ViewData.Model as T;
     }

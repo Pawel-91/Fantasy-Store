@@ -33,5 +33,19 @@ namespace FantasyStore.Models
             }
             context.SaveChanges();
         }
+
+        public Product DeleteProduct(int id)
+        {
+            Product dbEntry = context.Products
+                .FirstOrDefault(p => p.ProductID == id);
+
+            if(dbEntry != null)
+            {
+                context.Products.Remove(dbEntry);
+                context.SaveChanges();
+            }
+
+            return dbEntry;
+        }
     }
 }

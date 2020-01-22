@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace FantasyStore.Models
 {
@@ -15,6 +13,19 @@ namespace FantasyStore.Models
             new Product { ProductID = 3, Category = "Books", Name = "D&D Monster Manual", Price = 40},
 
         }.AsQueryable();
+
+        public Product DeleteProduct(int id)
+        {
+            List<Product> entries = Products.ToList();
+            Product entry = entries.FirstOrDefault(p => p.ProductID == id);
+
+            if(entry != null)
+            {
+                entries.Remove(entry);
+                Products = entries.AsQueryable();
+            }
+            return entry;
+        }
 
         public void SaveProduct(Product product)
         {

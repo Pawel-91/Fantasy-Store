@@ -1,9 +1,11 @@
 ﻿using FantasyStore.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 
 namespace FantasyStore.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IProductRepository repository;

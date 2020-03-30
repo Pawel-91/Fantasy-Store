@@ -5,6 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 using FantasyStore.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 
 namespace FantasyStore
 {
@@ -20,6 +21,15 @@ namespace FantasyStore
                 options =>
                 options.UseSqlServer(
                     Configuration["Data:FantasyStoreProducts:ConnectionString"]));
+
+            services.AddDbContext<AppIdentityDbContext>(
+                options =>
+                options.UseSqlServer(
+                    Configuration["Data:FantasyStoreIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             services.AddTransient<IProductRepository, EFProductRepository>();
             services.AddTransient<IOrderRepository, EFOrderRepository>();
@@ -42,6 +52,7 @@ namespace FantasyStore
             app.UseStatusCodePages();
             app.UseStaticFiles();
             app.UseSession();       // allows the session system to automatically associate requests with sessions when they arrive from the client
+            app.UseAuthentication();
             
                         app.UseMvc(routes =>
             {
@@ -68,6 +79,7 @@ namespace FantasyStore
                 routes.MapRoute("default", "{controller=Product}/{action=List}/{id?}");
             });
             SeedData.EnsurePopulated(app);
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

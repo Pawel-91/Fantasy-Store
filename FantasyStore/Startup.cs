@@ -38,7 +38,8 @@ namespace FantasyStore
 
             services.AddMvc();
             services.AddMemoryCache();   // sets up the in-memory data store - lost after application stops or restarts
-            services.AddSession();       // the services used to access session data
+            services.AddSession(options => 
+                options.Cookie.SecurePolicy = CookieSecurePolicy.Always);       // the services used to access session data
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +48,11 @@ namespace FantasyStore
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
             }
 
             app.UseStatusCodePages();
@@ -54,8 +60,13 @@ namespace FantasyStore
             app.UseSession();       // allows the session system to automatically associate requests with sessions when they arrive from the client
             app.UseAuthentication();
             
-                        app.UseMvc(routes =>
+            app.UseMvc(routes =>
             {
+                routes.MapRoute(
+                    name: "Error",
+                    template: "Error",
+                    defaults: new { Controller = "Error", action = "Error" });
+
                 routes.MapRoute(
                     name: null,
                     template: "{category}/Page{productPage:int}",
@@ -78,8 +89,8 @@ namespace FantasyStore
 
                 routes.MapRoute("default", "{controller=Product}/{action=List}/{id?}");
             });
-            SeedData.EnsurePopulated(app);
-            IdentitySeedData.EnsurePopulated(app);
+            //SeedData.EnsurePopulated(app);
+            //IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
